@@ -6,6 +6,7 @@ class State:
         self.name = name
         self.style = style
         self.color = color
+        self.rank = ""
         
         self.rendered = False
         
@@ -29,13 +30,14 @@ class State:
 
 class automata:
 
-    def __init__(self, state_names, alphabet, start_state, final_states):
+    def __init__(self, state_names, alphabet, start_state, final_states, graph_args={}):
         self.alphabet = alphabet
         self.start_state = start_state
         self.final_states = final_states
         self.edges = list()
         self.states = list()
         self.graph = None
+        self.graph_args = graph_args
         
       
         for state_name in state_names:
@@ -211,6 +213,9 @@ class automata:
     
     def _repr_svg_(self):
         self.graph = graphviz.Digraph()
+
+        for key in self.graph_args.keys():
+            self.graph.graph_attr[key] = self.graph_args[key]
         
         self._check_start_end() # Update if we changed/added the start/end states since making this obeject
         
