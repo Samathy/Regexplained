@@ -154,7 +154,9 @@ class automata:
         for a in copied_automatons:
             new_states += a.states
             new_edges += a.edges
-            new_final_states += a.final_states
+
+        new_final_states = copied_automatons[-1].final_states
+
             
         
         new_automaton = automata(new_states, copied_automatons[0], copied_automatons[0].start_state, new_final_states)
